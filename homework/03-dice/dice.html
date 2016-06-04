@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dice homework</title>
+</head>
+<body>
+
+<h1 id="di1"></h1>
+<h1 id="di2"></h1>
+<button id="btn">Roll dice</button>
+<button id="btn2" onclick="diceRoll()">Roll dice</button>
+<script type="text/javascript">
+	
+var random = function(){
+	return Math.floor(Math.random()*6)
+}
+function diceRoll(){
+	document.getElementById('di1').innerHTML=random();
+	document.getElementById('di2').innerHTML=random();
+}
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+	diceRoll()
+});
+
+document.getElementById('btn').addEventListener("click", function(){
+	diceRoll()
+})
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+
+red button pressed
+	if light off
+		turn light on
+		make light red
+
+	else if light on and light is orange
+		make light red
+
+	else if light on and light is red
+		turn light off
+
+
+
+orange button pressed
+	if light off
+		turn light on
+		make light orange
+
+	else if light on and light is red
+		make light orange
+
+	else if light on and light is orange
+		turn light off
+
+
+
+
+///////////
+
+
+when any button is pressed
+	if button is red
+		if light off
+			turn light on
+			make light red
+
+		else if light on and light is orange
+			make light red
+
+		else if light on and light is red
+			turn light off
+
+
+	else if button is orange
+		if light off
+			turn light on
+			make light orange
+
+		else if light on and light is red
+			make light orange
+
+		else if light on and light is orange
+			turn light off
