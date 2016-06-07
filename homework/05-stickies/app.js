@@ -1,5 +1,5 @@
 
-		// Stop me miss-spelling selector
+		// Helper function - stop me miss-spelling selector
 		var $get = function(param){
 			return document.querySelector(param);
 		};
