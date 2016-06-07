@@ -4,7 +4,7 @@
 	<style>
 	html, body {
 		margin: 0;
-		height: 100%;
+		/*height: 100%;*/
 		width: 100%;
 		text-align: center;
 	}
@@ -28,6 +28,9 @@
 	#clicker {
 		padding: 20px;	
 	}
+	form {
+		margin: 30px
+	}
 	
 	#clicker, input, select {
 		display: inline-flex;
@@ -38,14 +41,16 @@
 </head>
 <body>
 
-	<input class="noteText" type="text" name="note"/>
-	<select id="colourPick">
-		<option value="red">Red</option>
-		<option value="lughtblue">Blue</option>
-		<option value="gold">Yellow</option>
-		<option value="lightgrey">Grey</option>
-	</select>
-	<button type="button" id="clicker">Save note</button>
+	<form> <!-- used as a container-->
+		<input id="noteText" type="text" name="note"/>
+		<select id="colourPick">
+			<option value="red">Red</option>
+			<option value="lughtblue">Blue</option>
+			<option value="gold">Yellow</option>
+			<option value="lightgrey">Grey</option>
+		</select>
+		<button type="button" id="clicker">Save note</button>
+	</form>
 	
 
 	<div class="container"></div>
@@ -57,29 +62,39 @@
 			return document.querySelector(param)
 		};
 		var noteText = function(){
-			return $get('.noteText').value
+			return $get('#noteText').value
 		};
 		var noteColor = function(){
 			return $get('#colourPick').value
 		};
+		var count = function(param){
+			if (!!$get(param)){
+				return (document.querySelectorAll(param).length) +1
+			}
+			else {
+				return 1
+			}	
+		}
 		
 		function createNote(c, t){
 			if (!!c && !!t){
 				var template = document.createElement('div');
 				template.className = 'box';
 				template.style.backgroundColor = c;
-				template.innerHTML = t;
+				template.innerHTML = count('.box') + '.' + t;
 			
 				$get('.container').appendChild(template);
-				$get('.noteText').value = '';
+				$get('#noteText').value = '';
 				return false;
 			} else {
 				alert('no note!');
+				return false
 			}	
 		};
 
-		$get('input').onkeypress = function(event){
-			if (event === 13){
+
+		$get('#noteText').onkeypress = function(event){
+			if (event.keyCode === 13){
 				event.preventDefault();
 				createNote(noteColor(), noteText());
 				return false;
