@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style>
+	html, body {
+		margin: 0;
+		height: 100%;
+		width: 100%;
+	}
+	.container {
+		display: flex;
+		justify-content: space-around;
+		flex-wrap: wrap;
+	}
+	.box {
+		padding: 1em;
+		height: 200px;
+		width: 200px;
+		margin: 2px;
+		text-align: center;
+		font-size: 2em;
+		line-height: 2em;
+		font-weight: bold;
+	}
+	</style>
+
+</head>
+<body>
+
+
+	<div class="container">
+	<form>
+		<input class="noteText" type="text" name="note">
+
+		<select id="colourPick">
+			<option value="red">Red</option>
+			<option value="lughtblue">Blue</option>
+			<option value="gold">Yello</option>
+			<option value="lightgrey">Grey</option>
+		</select>
+
+		<button id="clicker">Save</button>
+	</form>
+	</div>
+	<!-- js -->
+	<script src="app.js"></script>
+	<script type="text/javascript">
+
+		var $get = function(param){
+			return document.querySelector(param)
+		};
+		var noteText = function(){
+			return $get('.noteText').value
+		};
+		var noteColor = function(){
+			return $get('#colourPick').value
+		};
+		
+		function createNote(c, t){
+			if (!!c && !!t){
+				var template = document.createElement('div');
+				template.className = 'box';
+				template.style.backgroundColor = c;
+				template.innerHTML = t;
+			
+				$get('.container').appendChild(template);
+				$get('.noteText').value = '';
+				$get('.noteColor').value = '';
+				return false
+			} else {
+				console.log('no note!');
+			}	
+		};
+
+
+		$get('#clicker').onclick = function(){
+			createNote(noteColor(), noteText());
+			return false
+		}
+
+	</script>
+</body>
+</html>
