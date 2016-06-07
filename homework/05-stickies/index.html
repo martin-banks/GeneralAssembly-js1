@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="stylesheet" href="normalize.css">
 	<style>
 	html, body {
 		margin: 0;
@@ -25,90 +26,29 @@
 		line-height: 2em;
 		font-weight: bold;
 	}
-	#clicker {
-		padding: 20px;	
-	}
-	form {
-		margin: 30px
-	}
 	
 	#clicker, input, select {
 		display: inline-flex;
-		height: 50px;
+		padding: 20px;
+		margin: 10px;
 	}
 	</style>
 
 </head>
 <body>
 
-	<form> <!-- used as a container-->
-		<input id="noteText" type="text" name="note"/>
-		<select id="colourPick">
-			<option value="red">Red</option>
-			<option value="lughtblue">Blue</option>
-			<option value="gold">Yellow</option>
-			<option value="lightgrey">Grey</option>
-		</select>
-		<button type="button" id="clicker">Save note</button>
-	</form>
-	
+	<input id="noteText" type="text" name="note"/>
+	<select id="colourPick">
+		<option value="gold">Yellow</option>
+		<option value="lughtblue">Blue</option>
+		<option value="lightgrey">Grey</option>
+		<option value="red">Red</option>
+	</select>
+	<button type="button" id="clicker">Create sticky note</button>
 
 	<div class="container"></div>
 	<!-- js -->
 	<script src="app.js"></script>
-	<script type="text/javascript">
-
-		var $get = function(param){
-			return document.querySelector(param)
-		};
-		var noteText = function(){
-			return $get('#noteText').value
-		};
-		var noteColor = function(){
-			return $get('#colourPick').value
-		};
-		var count = function(param){
-			if (!!$get(param)){
-				return (document.querySelectorAll(param).length) +1
-			}
-			else {
-				return 1
-			}	
-		}
-		
-		function createNote(c, t){
-			if (!!c && !!t){
-				var template = document.createElement('div');
-				template.className = 'box';
-				template.style.backgroundColor = c;
-				template.innerHTML = count('.box') + '.' + t;
-			
-				$get('.container').appendChild(template);
-				$get('#noteText').value = '';
-				return false;
-			} else {
-				alert('no note!');
-				return false
-			}	
-		};
-
-
-		$get('#noteText').onkeypress = function(event){
-			if (event.keyCode === 13){
-				event.preventDefault();
-				createNote(noteColor(), noteText());
-				return false;
-			}
-		}
-
-		$get('#clicker').onclick = function(){
-			console.log('click')
-			createNote(noteColor(), noteText());	
-			return false
-		}
-
-
-
-	</script>
+	
 </body>
 </html>
