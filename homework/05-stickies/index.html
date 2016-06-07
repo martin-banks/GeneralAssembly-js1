@@ -6,11 +6,14 @@
 		margin: 0;
 		height: 100%;
 		width: 100%;
+		text-align: center;
 	}
 	.container {
 		display: flex;
 		justify-content: space-around;
 		flex-wrap: wrap;
+		height: 50px;
+		margin-top: 20px;
 	}
 	.box {
 		padding: 1em;
@@ -22,25 +25,39 @@
 		line-height: 2em;
 		font-weight: bold;
 	}
+	#clicker {
+		padding: 20px;
+		border: solid 1px lightgrey;
+		margin: 10px;
+	}
+	#clicker:hover {
+		background-color: rgba(200,230,255,0.5);
+	}
+	#clicker, input, select {
+		display: inline-flex;
+		height: 50px;
+	}
 	</style>
 
 </head>
 <body>
 
+<form>
+	<input class="noteText" type="text" name="note">
+	<select id="colourPick">
+		<option value="red">Red</option>
+		<option value="lughtblue">Blue</option>
+		<option value="gold">Yellow</option>
+		<option value="lightgrey">Grey</option>
+	</select>
+	<button type="button" id="clicker">Save note</button>
+</form>
+	
 
 	<div class="container">
-	<form>
-		<input class="noteText" type="text" name="note">
 
-		<select id="colourPick">
-			<option value="red">Red</option>
-			<option value="lughtblue">Blue</option>
-			<option value="gold">Yello</option>
-			<option value="lightgrey">Grey</option>
-		</select>
-
-		<button id="clicker">Save</button>
-	</form>
+		
+	
 	</div>
 	<!-- js -->
 	<script src="app.js"></script>
@@ -62,21 +79,28 @@
 				template.className = 'box';
 				template.style.backgroundColor = c;
 				template.innerHTML = t;
-			
+	
 				$get('.container').appendChild(template);
-				$get('.noteText').value = '';
-				$get('.noteColor').value = '';
-				return false
+				$get('.noteText').value = '';				
 			} else {
-				console.log('no note!');
+				alert('no note!');
 			}	
 		};
 
+		$get('.noteText').onkeypress = function(event){
+			if (event === 13){
+				event.preventDefault();
+				createNote(noteColor(), noteText());	
+			}
+		}
 
 		$get('#clicker').onclick = function(){
-			createNote(noteColor(), noteText());
-			return false
+			//preventDefault()
+			console.log('click')
+			createNote(noteColor(), noteText());	
 		}
+
+
 
 	</script>
 </body>
