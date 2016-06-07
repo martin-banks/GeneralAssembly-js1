@@ -26,13 +26,9 @@
 		font-weight: bold;
 	}
 	#clicker {
-		padding: 20px;
-		border: solid 1px lightgrey;
-		margin: 10px;
+		padding: 20px;	
 	}
-	#clicker:hover {
-		background-color: rgba(200,230,255,0.5);
-	}
+	
 	#clicker, input, select {
 		display: inline-flex;
 		height: 50px;
@@ -42,8 +38,7 @@
 </head>
 <body>
 
-<form>
-	<input class="noteText" type="text" name="note">
+	<input class="noteText" type="text" name="note"/>
 	<select id="colourPick">
 		<option value="red">Red</option>
 		<option value="lughtblue">Blue</option>
@@ -51,14 +46,9 @@
 		<option value="lightgrey">Grey</option>
 	</select>
 	<button type="button" id="clicker">Save note</button>
-</form>
 	
 
-	<div class="container">
-
-		
-	
-	</div>
+	<div class="container"></div>
 	<!-- js -->
 	<script src="app.js"></script>
 	<script type="text/javascript">
@@ -79,25 +69,27 @@
 				template.className = 'box';
 				template.style.backgroundColor = c;
 				template.innerHTML = t;
-	
+			
 				$get('.container').appendChild(template);
-				$get('.noteText').value = '';				
+				$get('.noteText').value = '';
+				return false;
 			} else {
 				alert('no note!');
 			}	
 		};
 
-		$get('.noteText').onkeypress = function(event){
+		$get('input').onkeypress = function(event){
 			if (event === 13){
 				event.preventDefault();
-				createNote(noteColor(), noteText());	
+				createNote(noteColor(), noteText());
+				return false;
 			}
 		}
 
 		$get('#clicker').onclick = function(){
-			//preventDefault()
 			console.log('click')
 			createNote(noteColor(), noteText());	
+			return false
 		}
 
 
