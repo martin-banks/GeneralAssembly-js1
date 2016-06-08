@@ -4,13 +4,15 @@ var $get = function(param){
 	return document.querySelector(param);
 };
 
-// IIFE 
-// self-executing function 
+// IIFE - Immediately, Invode Function Expression 
+// ~self-executing function 
 (function(){
 	$get('#noteText').focus(); // make the input field active
 })()
 
 
+
+// Refactored version with var out of global scope
 function createNote(){
 	/* // separate functions to get values form the user input 
 	var noteText = function(){
