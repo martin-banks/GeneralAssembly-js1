@@ -4,6 +4,10 @@ var $get = function(param){
 	return document.querySelector(param);
 };
 
+var $getAll = function(param){
+	return document.querySelectorAll(param);
+};
+
 // IIFE - Immediately, Invoked Function Expression 
 // ~self-executing function 
 (function(){
@@ -22,7 +26,7 @@ function createNote(){
 	// function to add index numbers - param for id/class/element to count
 	var count = function(param){
 		if (!!$get(param)){ // if there already are notes
-			return (document.querySelectorAll(param).length) +1; // count them
+			return ($getAll(param).length) +1; // count them
 		}
 		else { // else this is the first note
 			return 1;
@@ -37,8 +41,28 @@ function createNote(){
 			template.style.backgroundColor = getVal('#colourPick');
 			// Call count function and concatonate with input text
 			template.innerHTML = count('.box') + '.' + getVal('#noteText');
-	
+
 		$get('.container').appendChild(template); // add sticky to div.container 
+
+
+		// create textNode to append text into the remove button
+		var removeID = 'removeButton' + (count('.box')-1)
+		var x = document.createTextNode('X')
+		var removeButton = document.createElement('div');
+			removeButton.className = 'removeButton';
+			removeButton.id = removeID;
+			// append textNode to rmove button div
+			removeButton.appendChild(x);
+
+		
+		$getAll('.box')[($getAll('.box').length)-1].appendChild(removeButton);
+
+		// to add event listeners with dynamic element creation
+		// the function to be called must be wrapped in a function declaration
+		$get('#'+removeID).addEventListener('click', function() {removeNote(this.id)}, false)
+
+		console.log( $getAll('.box').length )
+
 		// clear fields ready for next sticky
 		$get('#noteText').value = '';
 		return false;
@@ -62,4 +86,11 @@ $get('#clicker').onclick = function(){
 	createNote(); // call addNotes functions
 	return false;
 }
+
+
+
+function removeNote(param){
+	$get('#'+param).parentNode.remove()
+
+};
 

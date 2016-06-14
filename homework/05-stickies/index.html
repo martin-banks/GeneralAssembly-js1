@@ -17,6 +17,7 @@
 		margin-top: 20px;
 	}
 	.box {
+		position: relative;
 		padding: 1em;
 		height: 200px;
 		width: 200px;
@@ -25,6 +26,22 @@
 		font-size: 2em;
 		line-height: 2em;
 		font-weight: bold;
+	}
+
+	.removeButton {
+		position: absolute;
+		top: 0;
+		right: 0;
+		font-size: 16px;
+		line-height: 32px;
+		font-weight: 100;
+		width: 32px;
+		height: 32px;
+		color: #fff;
+		border: solid 1px #fff;
+		background-color: rgba(0,0,0,0.1);
+		border-radius: 50%;
+		margin: 10px;
 	}
 	
 	#clicker, input, select {
@@ -40,15 +57,16 @@
 	<input id="noteText" type="text" name="note" placeholder="Type sticky note" />
 	<select id="colourPick">
 		<option value="gold">Yellow</option>
-		<option value="lughtblue">Blue</option>
+		<option value="lightblue">Blue</option>
 		<option value="lightgrey">Grey</option>
 		<option value="red">Red</option>
+		<option value="violet">Pink</option>
 	</select>
 	<button type="button" id="clicker">Create sticky note</button>
 
 	<div class="container"></div>
 	<!-- js -->
-	<script src="app2.js"></script>
+	<script src="app.js"></script>
 	
 </body>
 </html>
