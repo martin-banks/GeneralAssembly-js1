@@ -9,12 +9,21 @@
 		width: 100%;
 		text-align: center;
 	}
+	#inputContainer {
+		position: fixed;;
+		top: 0;
+		left:0;
+		width: 100%;
+		height: 85px; 
+		background-color: #f2f2f2;
+	}
 	.container {
 		display: flex;
 		justify-content: space-around;
 		flex-wrap: wrap;
 		height: 50px;
-		margin-top: 20px;
+		margin-top: 150px;
+		z-index: -1;
 	}
 	.box {
 		position: relative;
@@ -48,23 +57,60 @@
 		display: inline-flex;
 		padding: 20px;
 		margin: 10px;
+		width: 30%;
 	}
+
+	
+	input {
+		background-color: transparent;
+		border: none;
+		border-bottom: solid 1px #ccc;
+		text-align: left;
+	}
+
+	input:focus,
+	button:focus {
+		outline: none;
+	}
+
+	::-webkit-input-placeholder, {
+		color: #ccc;
+		//text-align: left;
+	}
+
+	#clicker {
+		background-color: transparent;
+		border: solid 1px #e2e2e2;
+		color: #aaa;
+		width: 15%;
+		text-align: center;
+	}
+	#clicker:hover {
+		background-color: #fff
+	}
+
+
 	</style>
 
 </head>
 <body>
 
-	<input id="noteText" type="text" name="note" placeholder="Type sticky note" />
-	<select id="colourPick">
-		<option value="gold">Yellow</option>
-		<option value="lightblue">Blue</option>
-		<option value="lightgrey">Grey</option>
-		<option value="red">Red</option>
-		<option value="violet">Pink</option>
-	</select>
-	<button type="button" id="clicker">Create sticky note</button>
-
 	<div class="container"></div>
+
+
+	<div id="inputContainer">
+		<input id="noteText" type="text" name="note" placeholder="Type sticky note" />
+		<select id="colourPick">
+			<option value="gold">Yellow</option>
+			<option value="lightblue">Blue</option>
+			<option value="lightgrey">Grey</option>
+			<option value="red">Red</option>
+			<option value="violet">Pink</option>
+		</select>
+		<button type="button" id="clicker">Create note</button>
+	</div>
+
+	
 	<!-- js -->
 	<script src="app_4.js"></script>
 	

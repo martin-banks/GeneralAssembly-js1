@@ -36,32 +36,26 @@ function createNote(){
 	
 
 	if ( !!(getVal('#noteText')) && !!(getVal('#colourPick')) ){ // if input not empty
-		// div template for sticky note
-		var template = document.createElement('div');
-			template.className = 'box';
-			// get value of selected colour from dropdown menu
-			template.style.backgroundColor = getVal('#colourPick');
-			// Call count function and concatonate with input text
-
-
+	
 		var noteNumber = document.createTextNode(count('.box'));
-		
+
 		var noteNumberPar = document.createElement('span');
 			noteNumberPar.className = 'noteNumber';
 			noteNumberPar.id ='noteNumber'+count('.box');
 			noteNumberPar.appendChild(noteNumber);
 
 		var stickyText = document.createTextNode(getVal('#noteText'));
+		
+		// div template for sticky note
+		var template = document.createElement('div');
+			template.className = 'box';
+			// get value of selected colour from dropdown menu
+			template.style.backgroundColor = getVal('#colourPick');
+			// Call count function and concatonate with input text	
 			template.appendChild(noteNumberPar);
 			template.appendChild(stickyText);
-		
-
-
-		//	template.innerHTML = noteNumberPar + '.' + getVal('#noteText');
-
 
 		$get('.container').appendChild(template); // add sticky to div.container 
-
 
 		// create textNode to append text into the remove button
 		var removeID = 'removeButton' + (count('.box')-1)
@@ -108,11 +102,8 @@ function updateNoteNumbers(){
 
 
 
-
-
-
 //////////////////////////////////////////////////////
-//////////////////////////////////////////////////////
+//////// Calling the functions ///////////////////////
 //////////////////////////////////////////////////////
 
 // keyboard events on input field
@@ -133,7 +124,9 @@ $get('#clicker').onclick = function(){
 }
 
 
-
+// removes note and udates numbers from div.container
+// click event added to div.removeButton on it's creation
+// references this.parentNode
 function removeNote(param){
 	param.remove();
 	updateNoteNumbers();
