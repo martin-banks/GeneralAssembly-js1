@@ -42,17 +42,22 @@ function createNote(){
 			// get value of selected colour from dropdown menu
 			template.style.backgroundColor = getVal('#colourPick');
 			// Call count function and concatonate with input text
-			template.innerHTML = count('.box') + '.' + getVal('#noteText');
 
-/*
+
 		var noteNumber = document.createTextNode(count('.box'));
-		var noteNumberPar = document.createElement('p');
+		
+		var noteNumberPar = document.createElement('span');
 			noteNumberPar.className = 'noteNumber';
-			noteNumberPar.id ='noteNumber'+count('.box');	
-			noteNumberPar.appendChild(noteNumberPar);
-		*/
+			noteNumberPar.id ='noteNumber'+count('.box');
+			noteNumberPar.appendChild(noteNumber);
+
+		var stickyText = document.createTextNode(getVal('#noteText'));
+			template.appendChild(noteNumberPar);
+			template.appendChild(stickyText);
+		
 
 
+		//	template.innerHTML = noteNumberPar + '.' + getVal('#noteText');
 
 
 		$get('.container').appendChild(template); // add sticky to div.container 
@@ -87,12 +92,14 @@ function createNote(){
 
 
 
-function addNoteNumbers(){
+function updateNoteNumbers(){
 	for(var i=0; i < $getAll('.box').length; i++){
 		console.log('box id before:', $getAll('.box')[i].id );
 
 		$getAll('.box')[i].id = 'stickyNote_'+(i+1);
 		$getAll('.box')[i].lastChild.id = 'removeButton' + (i+1);
+		$getAll('.box')[i].firstChild.id = 'noteNumber' + (i+1);
+		$getAll('.box')[i].firstChild.innerHTML = (i+1) + '. '
 
 		console.log('box id after:', $getAll('.box')[i].id );
 
@@ -113,7 +120,7 @@ $get('#noteText').onkeypress = function(event){
 	if (event.keyCode === 13){ // if enter button
 		event.preventDefault(); // prevent default behaviour - refresh
 		createNote(); // call addNotes function
-		addNoteNumbers();
+		updateNoteNumbers();
 		return false;
 	}
 }
@@ -121,6 +128,7 @@ $get('#noteText').onkeypress = function(event){
 // click event on button
 $get('#clicker').onclick = function(){
 	createNote(); // call addNotes functions
+	updateNoteNumbers();
 	return false;
 }
 
@@ -128,7 +136,7 @@ $get('#clicker').onclick = function(){
 
 function removeNote(param){
 	param.remove();
-	addNoteNumbers();
+	updateNoteNumbers();
 
 };
 
