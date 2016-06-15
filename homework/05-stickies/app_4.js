@@ -33,6 +33,8 @@ function createNote(){
 		}	
 	}
 
+	
+
 	if ( !!(getVal('#noteText')) && !!(getVal('#colourPick')) ){ // if input not empty
 		// div template for sticky note
 		var template = document.createElement('div');
@@ -41,6 +43,17 @@ function createNote(){
 			template.style.backgroundColor = getVal('#colourPick');
 			// Call count function and concatonate with input text
 			template.innerHTML = count('.box') + '.' + getVal('#noteText');
+
+/*
+		var noteNumber = document.createTextNode(count('.box'));
+		var noteNumberPar = document.createElement('p');
+			noteNumberPar.className = 'noteNumber';
+			noteNumberPar.id ='noteNumber'+count('.box');	
+			noteNumberPar.appendChild(noteNumberPar);
+		*/
+
+
+
 
 		$get('.container').appendChild(template); // add sticky to div.container 
 
@@ -59,7 +72,7 @@ function createNote(){
 
 		// to add event listeners with dynamic element creation
 		// the function to be called must be wrapped in a function declaration
-		$get('#'+removeID).addEventListener('click', function() {removeNote(this.id)}, false)
+		$get('#'+removeID).addEventListener('click', function() {removeNote(this.parentNode)}, false)
 
 		console.log( $getAll('.box').length )
 
@@ -72,11 +85,35 @@ function createNote(){
 	}	
 };
 
+
+
+function addNoteNumbers(){
+	for(var i=0; i < $getAll('.box').length; i++){
+		console.log('box id before:', $getAll('.box')[i].id );
+
+		$getAll('.box')[i].id = 'stickyNote_'+(i+1);
+		$getAll('.box')[i].lastChild.id = 'removeButton' + (i+1);
+
+		console.log('box id after:', $getAll('.box')[i].id );
+
+	}
+}
+
+
+
+
+
+
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
 // keyboard events on input field
 $get('#noteText').onkeypress = function(event){
 	if (event.keyCode === 13){ // if enter button
 		event.preventDefault(); // prevent default behaviour - refresh
 		createNote(); // call addNotes function
+		addNoteNumbers();
 		return false;
 	}
 }
@@ -90,7 +127,8 @@ $get('#clicker').onclick = function(){
 
 
 function removeNote(param){
-	$get('#'+param).parentNode.remove()
+	param.remove();
+	addNoteNumbers();
 
 };
 
