@@ -85,18 +85,22 @@ function createNote(){
 };
 
 
-
+// updates the numbers on each note to match it's index+1
+// updates ids to match index
 function updateNoteNumbers(){
 	for(var i=0; i < $getAll('.box').length; i++){
-		console.log('box id before:', $getAll('.box')[i].id );
+		//console.log('box id before:', $getAll('.box')[i].id );
 
+		// set id of each sticky note
 		$getAll('.box')[i].id = 'stickyNote_'+(i+1);
+		// set id of remove button - the last child of each sticky
 		$getAll('.box')[i].lastChild.id = 'removeButton' + (i+1);
+		// set id of index number - the first child of each sticky
 		$getAll('.box')[i].firstChild.id = 'noteNumber' + (i+1);
+		// set text of first child - the index number
 		$getAll('.box')[i].firstChild.innerHTML = (i+1) + '. '
 
-		console.log('box id after:', $getAll('.box')[i].id );
-
+		//console.log('box id after:', $getAll('.box')[i].id );
 	}
 }
 
