@@ -20,7 +20,7 @@ function createNote(){
 	};
 /*
 	// function to add index numbers - param for id/class/element to count
-	// only useful if this could have notes at beginning
+	// Over complicated
 	var count = function(param){
 		if (!!$get(param)){ // if there already are notes
 			return ($getAll(param).length) +1; // count them
@@ -30,17 +30,20 @@ function createNote(){
 		}	
 	}
 */
+//	var count = 0; // too simple, what if we start with notes?
 
-	var count = 0;
-	
+
+	var count = function() {
+		return ($getAll('.box').length) +1;
+	} 
 
 	if ( !!(getVal('#noteText')) && !!(getVal('#colourPick')) ){ // if input not empty
 	
-		var noteNumber = document.createTextNode(count);
+		var noteNumber = document.createTextNode(count());
 
 		var noteNumberPar = document.createElement('span');
 			noteNumberPar.className = 'noteNumber';
-			noteNumberPar.id ='noteNumber'+count;
+			noteNumberPar.id ='noteNumber'+count();
 			noteNumberPar.appendChild(noteNumber);
 
 		var stickyText = document.createTextNode(getVal('#noteText'));
@@ -57,22 +60,19 @@ function createNote(){
 		$get('.container').appendChild(template); // add sticky to div.container 
 
 		// create textNode to append text into the remove button
-		var removeID = 'removeButton' + (count-1)
+		var removeID = 'removeButton' + (count()-1)
 		var x = document.createTextNode('X')
 		var removeButton = document.createElement('div');
 			removeButton.className = 'removeButton';
 			removeButton.id = removeID;
 			// append textNode to rmove button div
 			removeButton.appendChild(x);
-
 		
 		$getAll('.box')[($getAll('.box').length)-1].appendChild(removeButton);
 
 		// to add event listeners with dynamic element creation
 		// the function to be called must be wrapped in a function declaration
-		$get('#'+removeID).addEventListener('click', function() {removeNote(this.parentNode)}, false)
-
-		console.log( $getAll('.box').length )
+		$get('#'+removeID).addEventListener('click', removeNote)
 
 		// clear fields ready for next sticky
 		$get('#noteText').value = '';
@@ -88,8 +88,6 @@ function createNote(){
 // updates ids to match index
 function updateNoteNumbers(){
 	for(var i=0; i < $getAll('.box').length; i++){
-		//console.log('box id before:', $getAll('.box')[i].id );
-
 		// set id of each sticky note
 		$getAll('.box')[i].id = 'stickyNote_'+(i+1);
 		// set id of remove button - the last child of each sticky
@@ -98,8 +96,6 @@ function updateNoteNumbers(){
 		$getAll('.box')[i].firstChild.id = 'noteNumber' + (i+1);
 		// set text of first child - the index number
 		$getAll('.box')[i].firstChild.innerHTML = (i+1) + '. '
-
-		//console.log('box id after:', $getAll('.box')[i].id );
 	}
 }
 
@@ -130,9 +126,8 @@ $get('#clicker').onclick = function(){
 // removes note and udates numbers from div.container
 // click event added to div.removeButton on it's creation
 // references this.parentNode
-function removeNote(param){
-	param.remove();
+function removeNote(){
+	this.parentNode.remove();
 	updateNoteNumbers();
-
 };
 
