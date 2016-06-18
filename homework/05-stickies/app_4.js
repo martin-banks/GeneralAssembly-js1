@@ -8,12 +8,8 @@ var $getAll = function(param){
 	return document.querySelectorAll(param);
 };
 
-// IIFE - Immediately, Invoked Function Expression 
-// ~self-executing function 
-(function(){
-	$get('#noteText').focus(); // make the input field active
-})()
 
+$get('#noteText').focus(); // make the input field active
 
 
 // Refactored version with var out of global scope
@@ -22,8 +18,9 @@ function createNote(){
 	var getVal = function(param){
 		return $get(param).value;
 	};
-
+/*
 	// function to add index numbers - param for id/class/element to count
+	// only useful if this could have notes at beginning
 	var count = function(param){
 		if (!!$get(param)){ // if there already are notes
 			return ($getAll(param).length) +1; // count them
@@ -32,16 +29,18 @@ function createNote(){
 			return 1;
 		}	
 	}
+*/
 
+	var count = 0;
 	
 
 	if ( !!(getVal('#noteText')) && !!(getVal('#colourPick')) ){ // if input not empty
 	
-		var noteNumber = document.createTextNode(count('.box'));
+		var noteNumber = document.createTextNode(count);
 
 		var noteNumberPar = document.createElement('span');
 			noteNumberPar.className = 'noteNumber';
-			noteNumberPar.id ='noteNumber'+count('.box');
+			noteNumberPar.id ='noteNumber'+count;
 			noteNumberPar.appendChild(noteNumber);
 
 		var stickyText = document.createTextNode(getVal('#noteText'));
@@ -58,7 +57,7 @@ function createNote(){
 		$get('.container').appendChild(template); // add sticky to div.container 
 
 		// create textNode to append text into the remove button
-		var removeID = 'removeButton' + (count('.box')-1)
+		var removeID = 'removeButton' + (count-1)
 		var x = document.createTextNode('X')
 		var removeButton = document.createElement('div');
 			removeButton.className = 'removeButton';
